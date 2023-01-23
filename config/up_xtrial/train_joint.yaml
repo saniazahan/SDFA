@@ -1,0 +1,59 @@
+
+work_dir: ./work_dir/ntu/xsub/msg3d_joint
+
+# feeder
+feeder: feeders.feeder.Feeder
+train_feeder_args:
+  data_path: /media/22905553/F020DDF820DDC5AE/Action_Dataset/Fall_detection_data/upfall_openpose/xtrial/train_joint.npy
+  label_path: /media/22905553/F020DDF820DDC5AE/Action_Dataset/Fall_detection_data/upfall_openpose/xtrial/train_label.pkl
+  debug: False
+  random_choose: False
+  random_shift: False
+  random_move: False
+  window_size: -1
+  normalization: True
+  random_choose: False
+  window_size: 1145
+
+test_feeder_args:
+  data_path: /media/22905553/F020DDF820DDC5AE/Action_Dataset/Fall_detection_data/upfall_openpose/xtrial/val_joint.npy
+  label_path: /media/22905553/F020DDF820DDC5AE/Action_Dataset/Fall_detection_data/upfall_openpose/xtrial/val_label.pkl
+  normalization: True
+  random_choose: False
+  window_size: 1145
+  
+# model
+model: model.model.Model
+model_args:
+  num_class: 2
+  num_point: 25  
+  max_frame: 1145
+  graph: 'graph.ntu_rgb_d.AdjMatrixGraph'
+  act_type: 'relu'
+  bias: True
+  edge: True
+  block_size: 41
+
+# optim
+weight_decay: 0.0005
+base_lr: 0.05
+step: [30,40]
+
+# training
+num_epoch: 50
+device: [0]
+batch_size: 16
+forward_batch_size: 8
+test_batch_size: 64
+nesterov: True
+
+weights: /home/uniwa/students3/students/22905553/linux/phd_codes/Light_Fall/ntu_xview/weights/weights-30-35070.pt
+
+#weights: /home/uniwa/students3/students/22905553/linux/phd_codes/Light_Fall/Trial6_2/weights/weights-10-250.pt
+#weights: /home/uniwa/students3/students/22905553/linux/phd_codes/Fall_detection/ntu_xview/weights/weights-15-285.pt
+
+#ignore-weights: fc
+#checkpoint: /home/uniwa/students3/students/22905553/linux/phd_codes/Light_Fall/Trial6_2/checkpoints/checkpoint-10-fwbz16-250.pt
+
+
+
